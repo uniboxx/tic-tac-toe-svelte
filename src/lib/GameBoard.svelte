@@ -1,25 +1,17 @@
 <script>
-  const initialGameBoard = [
-    [null, null, null],
-    [null, null, null],
-    [null, null, null],
-  ];
-
-  let gameBoard = $state(initialGameBoard);
-
-  function handleSelectSquare(rowIndex, colIndex) {
-    gameBoard[rowIndex][colIndex] = 'X';
-  }
+  import { s } from '../assets/state.svelte';
+  // $inspect(s.gameBoard);
 </script>
 
 <ol id="game-board">
-  {#each gameBoard as row, rowIdx (rowIdx)}
+  {#each s.gameBoard as row, rowIdx (rowIdx)}
     <li>
       <ol>
         {#each row as playerSymbol, colIdx (colIdx)}
           <li>
-            <button onclick={() => handleSelectSquare(rowIdx, colIdx)}
-              >{playerSymbol}</button>
+            <button
+              onclick={() => s.handleSelectSquare(rowIdx, colIdx)}
+              disabled={playerSymbol !== null}>{playerSymbol}</button>
           </li>
         {/each}
       </ol>
@@ -59,5 +51,9 @@
     cursor: pointer;
     font-family: 'Caprasimo', cursive;
     padding: 1rem;
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
   }
 </style>

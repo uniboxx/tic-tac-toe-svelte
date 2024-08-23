@@ -1,5 +1,6 @@
 <script>
-  let { initialName, symbol } = $props();
+  import { s } from '../assets/state.svelte';
+  let { initialName, symbol, isActive } = $props();
   let isEditing = $state(false);
   let name = $state(initialName);
   let btnCaption = $derived.by(() => (!isEditing ? 'Edit' : 'Save'));
@@ -9,7 +10,7 @@
   }
 </script>
 
-<li>
+<li class={isActive ? 'active' : ''}>
   <span class="player">
     {#if !isEditing}
       <span class="player-name">{name}</span>
