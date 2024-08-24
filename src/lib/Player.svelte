@@ -91,9 +91,6 @@
       width: 80%;
       padding: 0;
     }
-    .player-input {
-      width: 60%;
-    }
     .player-symbol {
       margin-left: 0;
     }
