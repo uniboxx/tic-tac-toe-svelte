@@ -4,10 +4,14 @@
   let isEditing = $state(false);
   let name = $state(initialName);
   let btnCaption = $derived.by(() => (!isEditing ? 'Edit' : 'Save'));
+  // $inspect(name);
+  // $inspect(isEditing);
 
   function handleEditClick() {
     isEditing = !isEditing;
+    if (!isEditing) s.updatePlayerName(symbol, name);
   }
+  // $inspect(s.players);
 </script>
 
 <li class={isActive ? 'active' : ''}>

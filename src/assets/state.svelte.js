@@ -11,6 +11,10 @@ function createState() {
   let winner = $state();
   let gameBoard = $state(initialGameBoard);
   let hasDraw = $state(false);
+  let players = $state({
+    X: 'Player 1',
+    O: 'Player 2',
+  });
 
   let activePlayer = $derived.by(() => {
     let activePlayer = 'X';
@@ -51,7 +55,7 @@ function createState() {
       firstSquareSymbol === secondSquareSymbol &&
       firstSquareSymbol === thirdSquareSymbol
     ) {
-      winner = firstSquareSymbol;
+      winner = players[firstSquareSymbol];
     }
   }
 
@@ -72,6 +76,11 @@ function createState() {
     gameTurns = [];
     winner = '';
     hasDraw = false;
+    players = { X: 'Player 1', O: 'Player 2' };
+  }
+
+  function updatePlayerName(symbol, newName) {
+    players[symbol] = newName;
   }
 
   return {
@@ -99,8 +108,15 @@ function createState() {
     set hasDraw(value) {
       hasDraw = value;
     },
+    get players() {
+      return players;
+    },
+    set players(value) {
+      players = value;
+    },
     checkCombinations,
     handleSelectSquare,
+    updatePlayerName,
     handleRestart,
   };
 }
