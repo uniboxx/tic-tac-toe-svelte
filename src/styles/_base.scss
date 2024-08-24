@@ -26,4 +26,7 @@ body {
     30% 30%,
     100% 100%;
   min-height: 110rem;
+  @media screen and (max-width: $sm) {
+    min-height: 0;
+  }
 }

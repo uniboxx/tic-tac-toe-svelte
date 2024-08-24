@@ -72,7 +72,7 @@ function createState() {
   }
 
   function updatePlayerName(symbol, newName) {
-    players[symbol] = newName;
+    players[symbol] = newName[0].toUpperCase() + newName.slice(1).toLowerCase();
   }
 
   return {
