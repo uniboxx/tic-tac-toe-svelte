@@ -1,5 +1,6 @@
 <script>
   import { s } from '../assets/state.svelte';
+
   let { initialName, symbol, isActive } = $props();
   let isEditing = $state(false);
   let name = $state(initialName);
@@ -16,12 +17,14 @@
 
 <li class={isActive ? 'active' : ''}>
   <span class="player">
-    {#if !isEditing}
-      <span class="player-name">{name}</span>
-    {:else}
-      <input type="text" bind:value={name} required />
-    {/if}
-    <span class="player-symbol">{symbol}</span>
+    <p>
+      {#if !isEditing}
+        <span class="player-name">{name}</span>
+      {:else}
+        <input type="text" bind:value={name} required />
+      {/if}
+      <span class="player-symbol">{symbol}</span>
+    </p>
     <button onclick={handleEditClick}>{btnCaption}</button>
   </span>
 </li>
@@ -30,6 +33,10 @@
   @use '../styles/vars';
 
   .player {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
     border: 2px solid transparent;
     padding: 0.5rem;
     border-radius: 4px;
@@ -65,6 +72,33 @@
     margin-left: 1rem;
     font-size: 1rem;
     color: #e1dec7;
+  }
+
+  @media screen and (max-width: vars.$sm) {
+    .player {
+      display: block;
+      width: 100%;
+    }
+    .player p {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      /* gap: 1rem; */
+    }
+    .player-name,
+    .player input {
+      display: inline-block;
+      width: 80%;
+      padding: 0;
+    }
+    .player-input {
+      width: 60%;
+    }
+    .player-symbol {
+      margin-left: 0;
+    }
+    .player-button {
+    }
   }
 
   @keyframes pulse-text {

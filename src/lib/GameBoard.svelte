@@ -45,6 +45,9 @@
     width: 8rem;
     height: 8rem;
     border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: #aca788;
     color: #3f3b00;
     font-size: 5rem;
@@ -53,7 +56,15 @@
     padding: 1rem;
     &:disabled {
       cursor: not-allowed;
-      // opacity: 0.7;
+    }
+  }
+  @media screen and (max-width: vars.$sm) {
+    #game-board {
+      button {
+        width: 4rem;
+        height: 4rem;
+        font-size: 3rem;
+      }
     }
   }
 </style>

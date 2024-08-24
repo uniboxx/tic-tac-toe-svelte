@@ -1,4 +1,9 @@
-const initialGameBoard = [
+export const PLAYERS = {
+  X: 'Player 1',
+  O: 'Player 2',
+};
+
+const INITIAL_GAME_BOARD = [
   [null, null, null],
   [null, null, null],
   [null, null, null],
@@ -9,12 +14,9 @@ import { WINNING_COMBINATIONS } from '../winning-combinations';
 function createState() {
   let gameTurns = $state([]);
   let winner = $state();
-  let gameBoard = $state(initialGameBoard);
+  let gameBoard = $state(INITIAL_GAME_BOARD);
   let hasDraw = $state(false);
-  let players = $state({
-    X: 'Player 1',
-    O: 'Player 2',
-  });
+  let players = $state(PLAYERS);
 
   let activePlayer = $derived.by(() => {
     let activePlayer = 'X';
@@ -23,16 +25,6 @@ function createState() {
     }
     return activePlayer;
   });
-
-  // let gameBoard = $derived.by(() => {
-  //   let gameBoard = initialGameBoard;
-  //   gameTurns.forEach(turn => {
-  //     const { square, player } = turn;
-  //     const { row, col } = square;
-  //     gameBoard[row][col] = player;
-  //   });
-  //   return gameBoard;
-  // });
 
   function updateGameBoard() {
     gameTurns.forEach(turn => {
@@ -72,11 +64,11 @@ function createState() {
     hasDraw = gameTurns.length === 9 && !winner;
   }
   function handleRestart() {
-    gameBoard = initialGameBoard;
+    gameBoard = INITIAL_GAME_BOARD;
     gameTurns = [];
     winner = '';
     hasDraw = false;
-    players = { X: 'Player 1', O: 'Player 2' };
+    // players = PLAYERS;
   }
 
   function updatePlayerName(symbol, newName) {
